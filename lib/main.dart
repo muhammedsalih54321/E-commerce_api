@@ -1,4 +1,6 @@
+import 'package:e_commerce_api/Bloc/Details/details_bloc.dart';
 import 'package:e_commerce_api/Bloc/E-commerce/e_commerce_bloc.dart';
+import 'package:e_commerce_api/Bloc/Review/review_bloc.dart';
 import 'package:e_commerce_api/Ui/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,8 +19,13 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(393, 852),
         builder: (BuildContext context, Widget? child) {
-          return BlocProvider(
-            create: (context) => ECommerceBloc(),
+          return MultiBlocProvider(
+           providers: [
+            BlocProvider( create: (context) => ECommerceBloc(),),
+             BlocProvider( create: (context) => ReviewBloc(),),
+             BlocProvider( create: (context) => DetailsBloc(),)
+
+           ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
@@ -30,5 +37,5 @@ class MyApp extends StatelessWidget {
             ),
           );
         });
-  }
+  } 
 }
